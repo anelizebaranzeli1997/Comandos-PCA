@@ -4,12 +4,12 @@ rm(libs)
 set.seed(12345)
 #contagem
 data1<-read.csv2("tabela_contagens.csv", sep=",", header=TRUE, row.names=1, check.names = FALSE)
-pca1 = prcomp(t(data1)); plot(pca1$x[1:39,1:2], pch = 16)
+pca1 = prcomp(t(data1)); plot(pca1$x[1:39,1:2], pch = 16, cex = 2)
 pamx1 = pamk(pca1$x[1:39,1:2],krange=2:20,criterion="asw", usepam=TRUE, scaling=FALSE, alpha=0.001, diss=inherits(data, "dist"), critout=FALSE, ns=10, seed=NULL);
-plot(pca1$x[1:39,1:2], pch=16, col = pamx1$pamobject$clustering)
+plot(pca1$x[1:39,1:2], pch=16, col = pamx1$pamobject$clustering, cex = 2)
 #ausência-presença 
 data2<-read.csv2("tabela_presenca-ausencia.csv", sep=",", header=TRUE, row.names=1, check.names = FALSE)
-pca2 = prcomp(t(data2)); plot(pca2$x[1:39,1:2], pch = 16)
+pca2 = prcomp(t(data2)); plot(pca2$x[1:39,1:2], pch = 16, cex = 2)
 pamx2 = pamk(pca2$x[1:39,1:2],krange=2:20,criterion="asw", usepam=TRUE, scaling=FALSE, alpha=0.001, diss=inherits(data, "dist"), critout=FALSE, ns=10, seed=NULL);
-plot(pca2$x[1:39,1:2], pch=16, col = pamx2$pamobject$clustering)
+plot(pca2$x[1:39,1:2], pch=16, col = pamx2$pamobject$clustering, cex = 2)
 
