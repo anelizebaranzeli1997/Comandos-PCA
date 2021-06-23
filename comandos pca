@@ -2,14 +2,26 @@ libs<-c("pheatmap","Rtsne","reshape","ggplot2","tidyr","factoextra","Rtsne","tid
 lapply(libs, require, character.only = TRUE)
 rm(libs)
 set.seed(12345)
-#contagem
+
+#transparência contagem 
 data1<-read.csv2("tabela_contagens.csv", sep=",", header=TRUE, row.names=1, check.names = FALSE)
 pca1 = prcomp(t(data1)); plot(pca1$x[1:39,1:2], pch = 16, cex = 2)
 pamx1 = pamk(pca1$x[1:39,1:2],krange=2:20,criterion="asw", usepam=TRUE, scaling=FALSE, alpha=0.001, diss=inherits(data, "dist"), critout=FALSE, ns=10, seed=NULL);
 plot(pca1$x[1:39,1:2], pch=16, col = pamx1$pamobject$clustering, cex = 2)
-#ausência-presença 
-data2<-read.csv2("tabela_presenca-ausencia.csv", sep=",", header=TRUE, row.names=1, check.names = FALSE)
-pca2 = prcomp(t(data2)); plot(pca2$x[1:39,1:2], pch = 16, cex = 2)
-pamx2 = pamk(pca2$x[1:39,1:2],krange=2:20,criterion="asw", usepam=TRUE, scaling=FALSE, alpha=0.001, diss=inherits(data, "dist"), critout=FALSE, ns=10, seed=NULL);
-plot(pca2$x[1:39,1:2], pch=16, col = pamx2$pamobject$clustering, cex = 2)
+r <- col2rgb(as.vector(pamx1$pamobject$clustering))[1,]
+g <- col2rgb(as.vector(pamx1$pamobject$clustering))[2,]
+b <- col2rgb(as.vector(pamx1$pamobject$clustering))[3,]
+plot(pca1$x[1:39,1:2], col =  rgb(r, g, b, 100, maxColorValue=255), pch=16,main="",xlab="",ylab="", cex=2)
+legend("topright", legend=unique(pamx1$pamobject$clustering), fill = unique(pamx1$pamobject$clustering))
+
+#transparência ausência-presença 
+data1<-read.csv2("tabela_presenca-ausencia.csv", sep=",", header=TRUE, row.names=1, check.names = FALSE)
+pca1 = prcomp(t(data1)); plot(pca1$x[1:39,1:2], pch = 16, cex = 2)
+pamx1 = pamk(pca1$x[1:39,1:2],krange=2:20,criterion="asw", usepam=TRUE, scaling=FALSE, alpha=0.001, diss=inherits(data, "dist"), critout=FALSE, ns=10, seed=NULL);
+plot(pca1$x[1:39,1:2], pch=16, col = pamx1$pamobject$clustering, cex = 2)
+r <- col2rgb(as.vector(pamx1$pamobject$clustering))[1,]
+g <- col2rgb(as.vector(pamx1$pamobject$clustering))[2,]
+b <- col2rgb(as.vector(pamx1$pamobject$clustering))[3,]
+plot(pca1$x[1:39,1:2], col =  rgb(r, g, b, 100, maxColorValue=255), pch=16,main="",xlab="",ylab="", cex=2)
+legend("topright", legend=unique(pamx1$pamobject$clustering), fill = unique(pamx1$pamobject$clustering))
 
